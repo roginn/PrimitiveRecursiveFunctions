@@ -18,8 +18,6 @@ public:
     { return F(CompFunc(boost::bind(to_bind, a, b))); }
     static F bind(F (*to_bind)(F, F, F), const F& a, const F& b, const F& c)
     { return F(CompFunc(boost::bind(to_bind, a, b, c))); }
-    static F bind(F (*to_bind)(F&, F&, F&), const F& a, const F& b, const F& c)
-    { return F(CompFunc(boost::bind(to_bind, a, b, c))); }
     static F bind(F (*to_bind)(F, F, F, F), const F& a, const F& b, const F& c, const F& d)
     { return F(CompFunc(boost::bind(to_bind, a, b, c, d))); }
 
