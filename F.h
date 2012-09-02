@@ -11,20 +11,26 @@ public:
     F(const CompFunc& g) : g_(g), comp(true) {}
 
     static F bind(unsigned int (*to_bind)(unsigned int), unsigned int a)
-    { return F(Func(boost::bind(to_bind, a))); }
-    static F bind(F (*to_bind)(F), const F& a)
-    { return F(CompFunc(boost::bind(to_bind, a))); }
-    static F bind(F (*to_bind)(F, F), const F& a, const F& b)
-    { return F(CompFunc(boost::bind(to_bind, a, b))); }
-    static F bind(F (*to_bind)(F, F, F), const F& a, const F& b, const F& c)
-    { return F(CompFunc(boost::bind(to_bind, a, b, c))); }
-    static F bind(F (*to_bind)(F&, F&, F&), const F& a, const F& b, const F& c)
-    { return F(CompFunc(boost::bind(to_bind, a, b, c))); }
-    static F bind(F (*to_bind)(F, F, F, F), const F& a, const F& b, const F& c, const F& d)
-    { return F(CompFunc(boost::bind(to_bind, a, b, c, d))); }
+    { return F((Func) boost::bind(to_bind, a)); }
 
-    static F fun(F a, F b, F c, F d) { return a > b ? c : d; }
-    static F inc(F a) { return F::bind(&F::inc_, a()); }
+    static F bind(F (*to_bind)(const F&), const F& a)
+    { return F((CompFunc) boost::bind(to_bind, a)); }
+    
+    static F bind(F (*to_bind)(const F&, const F&), const F& a, const F& b)
+    { return F((CompFunc) boost::bind(to_bind, a, b)); }
+    
+    static F bind(F (*to_bind)(const F&, const F&, const F&), 
+        const F& a, const F& b, const F& c)
+    { return F((CompFunc) boost::bind(to_bind, a, b, c)); }
+    
+    static F bind(F (*to_bind)(const F&, const F&, const F&, const F&), 
+        const F& a, const F& b, const F& c, const F& d)
+    { return F((CompFunc) boost::bind(to_bind, a, b, c, d)); }
+
+    static F fun(const F& a, const F& b, const F& c, const F& d) 
+    { return a > b ? c : d; }
+    
+    static F inc(const F& a) { return F::bind(&F::inc_, a()); }
     const static F zero;
 
 private:
