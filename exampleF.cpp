@@ -6,12 +6,12 @@ Consider the following functions:
     inc(a) = a+1
 
 Your challenge is to derive the basic mathematical (+, -, *, /, %) and logic
-(&, |, ~) operations using only these 2 functions, recursion and the number 0, 
+(&, |, ~) operations using only these 2 functions, recursion and the number 0,
 
 F.h provides a simple wrapper for you to test your answer. You must always
 work with F objects to represent a number, using:
 
-    F F::fun(const F& a, const F& b, const F& c, const F& d) 
+    F F::fun(const F& a, const F& b, const F& c, const F& d)
         (returns the equivalent to a > b ? c : d )
     F F::inc(const F& a)
         (returns the equivalent to a++)
@@ -30,7 +30,7 @@ F my_function(const F& arg1, const F& arg2){
     );
 }
 
-C++ will try to evaluate my_function(arg1, F::zero) before it completes the call 
+C++ will try to evaluate my_function(arg1, F::zero) before it completes the call
 to F::fun, thus causing a stack overflow. You need a binding mechanism as a lazy
 evaluation wrapper to solve this:
 
@@ -43,7 +43,7 @@ F my_function(const F& arg1, const F& arg2){
     );
 }
 
-Then it should work as expected. 
+Then it should work as expected.
 
 You can also stream your result to std::cout, as in:
 
